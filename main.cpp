@@ -3,7 +3,7 @@
 
 int main() {
 	//HuffmanCoder hfcoder("mytestfile.txt");
-	HuffmanCoder hfcoder("TestFile.txt");
+	HuffmanCoder hfcoder("Assignment_4_Test_File.txt");
 
 	hfcoder.setHashTableSize(500);	// set hash table size accordingly based on how big the testfile is, default is 100
 
