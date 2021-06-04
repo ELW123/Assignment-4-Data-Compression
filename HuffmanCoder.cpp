@@ -161,7 +161,7 @@ void HuffmanCoder::decode(const string& datafile, const string& txtfile) const {
 	while (getline(file, line)) {	// read each line
 		istringstream ss(line);
 		string word;
-		while (ss >> word) {	// split into words
+		while (ss >> word) {	// split into words. Also, this part can be modified to display the punctuation correctly without spaces (but TA said it was fine)
 			// cout << word << "\n";
 			string decoded = _decoder->locate(word);
 			// cout << decoded << "\n";
@@ -245,39 +245,72 @@ void HuffmanCoder::tokenizePunct(const string& datafile) {
 				if (word.substr(word.find("'")+1).length() > 0) {
 					outFS << word.substr(word.find("'")+1) << " ";
 				}
-			} // unfixed below here
+			}
 			if (word.find("!") != string::npos) {
-				outFS << word.substr(0, word.find("!")) << " " << "!" << " " << word.substr(word.find("!")+1) << " ";
+				outFS << word.substr(0, word.find("!")) << " " << "!" << " ";
+				if (word.substr(word.find("!")+1).length() > 0) {
+					outFS << word.substr(word.find("!")+1) << " ";
+				}
 			}
 			if (word.find("?") != string::npos) {
-				outFS << word.substr(0, word.find("?")) << " " << "?" << " " << word.substr(word.find("?")+1) << " ";
+				outFS << word.substr(0, word.find("?")) << " " << "?" << " ";
+				if (word.substr(word.find("?")+1).length() > 0) {
+					outFS << word.substr(word.find("?")+1) << " ";
+				}
 			}
 			if (word.find("-") != string::npos) {
-				outFS << word.substr(0, word.find("-")) << " " << "-" << " " << word.substr(word.find("-")+1) << " ";
+				outFS << word.substr(0, word.find("-")) << " " << "-" << " ";
+				if (word.substr(word.find("-")+1).length() > 0) {
+					outFS << word.substr(word.find("-")+1) << " ";
+				}
 			}
 			if (word.find("*") != string::npos) {
-				outFS << word.substr(0, word.find("*")) << " " << "*" << " " << word.substr(word.find("*")+1) << " ";
+				outFS << word.substr(0, word.find("*")) << " " << "*" << " ";
+				if (word.substr(word.find("*")+1).length() > 0) {
+					outFS << word.substr(word.find("*")+1) << " ";
+				}
 			}
 			if (word.find("{") != string::npos) {
-				outFS << word.substr(0, word.find("{")) << " " << "{" << " " << word.substr(word.find("{")+1) << " ";
+				outFS << word.substr(0, word.find("{")) << " " << "{" << " ";
+				if (word.substr(word.find("{")+1).length() > 0) {
+					outFS << word.substr(word.find("{")+1) << " ";
+				}
 			}
 			if (word.find("}") != string::npos) {
-				outFS << word.substr(0, word.find("}")) << " " << "}" << " " << word.substr(word.find("}")+1) << " ";
+				outFS << word.substr(0, word.find("}")) << " " << "}" << " ";
+				if (word.substr(word.find("}")+1).length() > 0) {
+					outFS << word.substr(word.find("}")+1) << " ";
+				}
 			}
 			if (word.find(";") != string::npos) {
-				outFS << word.substr(0, word.find(";")) << " " << ";" << " " << word.substr(word.find(";")+1) << " ";
+				outFS << word.substr(0, word.find(";")) << " " << ";" << " ";
+				if (word.substr(word.find(";")+1).length() > 0) {
+					outFS << word.substr(word.find(";")+1) << " ";
+				}
 			}
 			if (word.find("^") != string::npos) {
-				outFS << word.substr(0, word.find("^")) << " " << "^" << " " << word.substr(word.find("^")+1) << " ";
+				outFS << word.substr(0, word.find("^")) << " " << "^" << " ";
+				if (word.substr(word.find("^")+1).length() > 0) {
+					outFS << word.substr(word.find("^")+1) << " ";
+				}
 			}
 			if (word.find("%") != string::npos) {
-				outFS << word.substr(0, word.find("%")) << " " << "%" << " " << word.substr(word.find("%")+1) << " ";
+				outFS << word.substr(0, word.find("%")) << " " << "%" << " ";
+				if (word.substr(word.find("%")+1).length() > 0) {
+					outFS << word.substr(word.find("%")+1) << " ";
+				}
 			}
 			if (word.find("/") != string::npos) {
-				outFS << word.substr(0, word.find("#")) << " " << "#" << " " << word.substr(word.find("#")+1) << " ";
+				outFS << word.substr(0, word.find("/")) << " " << "/" << " ";
+				if (word.substr(word.find("/")+1).length() > 0) {
+					outFS << word.substr(word.find("/")+1) << " ";
+				}
 			}
 			if (word.find("$") != string::npos) {
-				outFS << word.substr(0, word.find("$")) << " " << "$" << " " << word.substr(word.find("$")+1) << " ";
+				outFS << word.substr(0, word.find("$")) << " " << "$" << " ";
+				if (word.substr(word.find("$")+1).length() > 0) {
+					outFS << word.substr(word.find("$")+1) << " ";
+				}
 			}
 			if (!containsPunct(word)) {
 				outFS << word << " ";
