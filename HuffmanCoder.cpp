@@ -58,6 +58,9 @@ void HuffmanCoder::encode() {
 
 	// extracting words from file
 	string word;
+	string punctWordInitial;
+	string punctWordAfter;
+	int location;
 	while (file >> word) {
 		//cout << word << endl;
 		WFCIter it=find(word);
@@ -171,3 +174,105 @@ void HuffmanCoder::decode(const string& datafile, const string& txtfile) const {
     outFS.close();
 }
 
+bool HuffmanCoder::containsPunct(string c) {
+	if (c.find('.') != std::string::npos ||
+        c.find(',') != std::string::npos ||
+        c.find('\"') != std::string::npos ||
+        c.find('\'') != std::string::npos ||
+        c.find('!') != std::string::npos ||
+        c.find('?') != std::string::npos ||
+        c.find('-') != std::string::npos ||
+        c.find('*') != std::string::npos ||
+        c.find('{') != std::string::npos ||
+        c.find('}') != std::string::npos ||
+		c.find(';') != std::string::npos ||
+		c.find('^') != std::string::npos ||
+		c.find('%') != std::string::npos ||
+		c.find('/') != std::string::npos ||
+		c.find('$') != std::string::npos) {
+        return true;
+    }
+
+    return false;
+}
+
+// reads in data from TestFile and creates a new punctuation friendly doc that the rest of the program will read over
+void HuffmanCoder::tokenizePunct(const string& datafile) {
+	ifstream file;
+	file.open(_filename.c_str());
+	if (!file.is_open()) {
+      cout << "Could not open file:" << _filename << endl;
+      return;
+    }
+	
+	ofstream outFS(datafile.c_str());
+    if(!outFS.is_open()) {
+        cout<<"Could not write file:" << datafile <<endl;
+        return;
+    }
+
+	string line;
+	while (getline(file, line)) {	// read each line
+		istringstream ss(line);
+		string word;
+		
+		while (ss >> word) {	// split into words
+			// cout << word << "\n";
+			if (word.find(".") != string::npos) {
+				outFS << word.substr(0, word.find(".")) << " " << "." << " "; //<< word.substr(word.find(".")) << " "; still need to account for words after punctuation if nececssary
+				// cout << word.substr(word.find(".")) << endl;
+			} 
+			if (word.find(",") != string::npos) {
+				outFS << word.substr(0, word.find(",")) << " " << "," << " " << word.substr(word.find(",")) << " ";
+			}
+			if (word.find("\"") != string::npos) {
+				outFS << word.substr(0, word.find("\"")) << " " << "\"" << " " << word.substr(word.find("\"")) << " ";
+			}
+			if (word.find("\'") != string::npos) {
+				outFS << word.substr(0, word.find("\'")) << " " << "\'" << " " << word.substr(word.find("\'")) << " ";
+			}
+			if (word.find("!") != string::npos) {
+				outFS << word.substr(0, word.find("!")) << " " << "!" << " " << word.substr(word.find("!")) << " ";
+			}
+			if (word.find("?") != string::npos) {
+				outFS << word.substr(0, word.find("?")) << " " << "?" << " " << word.substr(word.find("?")) << " ";
+			}
+			if (word.find("-") != string::npos) {
+				outFS << word.substr(0, word.find("-")) << " " << "-" << " " << word.substr(word.find("-")) << " ";
+			}
+			if (word.find("*") != string::npos) {
+				outFS << word.substr(0, word.find("*")) << " " << "*" << " " << word.substr(word.find("*")) << " ";
+			}
+			if (word.find("{") != string::npos) {
+				outFS << word.substr(0, word.find("{")) << " " << "{" << " " << word.substr(word.find("{")) << " ";
+			}
+			if (word.find("}") != string::npos) {
+				outFS << word.substr(0, word.find("}")) << " " << "}" << " " << word.substr(word.find("}")) << " ";
+			}
+			if (word.find(";") != string::npos) {
+				outFS << word.substr(0, word.find(";")) << " " << ";" << " " << word.substr(word.find(";")) << " ";
+			}
+			if (word.find("^") != string::npos) {
+				outFS << word.substr(0, word.find("^")) << " " << "^" << " " << word.substr(word.find("^")) << " ";
+			}
+			if (word.find("%") != string::npos) {
+				outFS << word.substr(0, word.find("%")) << " " << "%" << " " << word.substr(word.find("%")) << " ";
+			}
+			if (word.find("/") != string::npos) {
+				outFS << word.substr(0, word.find("#")) << " " << "#" << " " << word.substr(word.find("#")) << " ";
+			}
+			if (word.find("$") != string::npos) {
+				outFS << word.substr(0, word.find("$")) << " " << "$" << " " << word.substr(word.find("$")) << " ";
+			}
+			if (!containsPunct(word)) {
+				outFS << word << " ";
+			}
+		}
+		outFS << endl;
+	}
+
+	_filename = datafile;
+
+	file.close();
+	outFS.close();
+}

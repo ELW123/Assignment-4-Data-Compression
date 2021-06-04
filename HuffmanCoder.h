@@ -28,6 +28,7 @@ private:
 	// helper functions
 	WFCIter find(const string& key);  // find in vector
 	void sort_assigncode();				// sort and assign code accordingly
+	bool containsPunct(string word);
 
 public:
     /* Constructors */
@@ -47,6 +48,9 @@ public:
 
 	// dump decoding hashtable
 	void outputMapping(const string& mapfile) const;
+
+	// directs _filename to a new file that is punctuation friendly
+	void tokenizePunct(const string& datafile);
 
     /* Accessors */
 

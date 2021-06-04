@@ -7,6 +7,8 @@ int main() {
 
 	hfcoder.setHashTableSize(500);	// set hash table size accordingly based on how big the testfile is, default is 100
 
+	hfcoder.tokenizePunct("TestFilePuncted.txt");
+
 	hfcoder.encode();	// create hashtables for encode and decode
 
 	hfcoder.outputData("encoded.data");
