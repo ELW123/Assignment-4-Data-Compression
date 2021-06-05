@@ -52,9 +52,9 @@ public:
 	// directs _filename to a new file that is punctuation friendly
 	void tokenizePunct(const string& datafile);
 
-    /* Accessors */
+    /* Accessors */ // none used
 
-    /* Printing */
+    /* Printing */ // all done within the functions for testing purposes
 };
 
 #endif // __HUFFMANCODER_H__

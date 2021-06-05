@@ -72,13 +72,12 @@ void HuffmanCoder::encode() {
 	}
 	file.close();
 
-	// print 
-/*
-	for (WFCIter it=_allWordFreqCode.begin(); it!=_allWordFreqCode.end(); it++)
-	{
+	// print freqs, saved to result.txt 
+
+	for (WFCIter it=_allWordFreqCode.begin(); it!=_allWordFreqCode.end(); it++) {
 		cout << (*it)._word << "\t" << (*it)._freq << endl;
 	}
-*/
+
 
 	sort_assigncode();	// sort in descending order and assign codes
 
